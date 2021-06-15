@@ -1,4 +1,7 @@
-it('should redirect to home page', () => {
-  cy.visit('/');
-  cy.location('pathname').should('eq', '/');
-});
+// it('should redirect to home page', () => {
+//   cy.visit('/');
+//   cy.location('pathname').should('eq', '/');
+// });
+
+
+

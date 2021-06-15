@@ -1,24 +1,53 @@
-import React, { FC } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloProvider } from '@apollo/client';
+import React, { FC, useState } from 'react';
 
-const App: FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+// import { CssBaseline, makeStyles, Box, Grid } from '@material-ui/core';
+
+import Task from './Components/Task';
+import apiGraphql from './Services/apiGraphql';
+
+// const useStyles = makeStyles({
+//   root: {
+//     height: '100vh',
+//     padding: '5rem',
+//   }
+// })
+
+
+const App: FC = () => {
+
+  const [tasks] = useState([{
+    title: 'primeiro'
+  }])
+
+  const onRemoveTaskHandler = (task: any) => {
+    console.log(task)
+  }
+
+  
+  // const classes = useStyles()
+
+  return (
+    <ApolloProvider client={apiGraphql}>
+      {/* <CssBaseline />
+      <Box className={classes.root}>
+        <Grid container>
+          <Grid item xs={12} sm={6}>
+            oi
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            ok
+          </Grid>
+        </Grid>
+      </Box> */}
+      {
+        tasks.map((task: any) => (
+          <Task task={task} onRemove={onRemoveTaskHandler} />
+        ))  
+      }
+      {/* <Task /> */}
+    </ApolloProvider>
+  )
+}
 
 export default App;

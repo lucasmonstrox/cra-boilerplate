@@ -8,7 +8,7 @@ interface Props {
 const Task: FC<Props> = ({task, onRemove}: Props) => (
     <>
         <p>{task.title}</p>
-        <button type="button" onClick={() => onRemove(task)}>Clique aqui</button>
+        <button type="button" onClick={() => onRemove(task)}>Remover</button>
     </>
 )
 

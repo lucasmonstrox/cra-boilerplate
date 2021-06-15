@@ -19,7 +19,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "cy:run": "cypress run --headless",
+    "cy:open": "cypress open",
     "test": "react-scripts test",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cy:run",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

@@ -6,37 +6,39 @@ import {
   CssBaseline,
   TextField,
 } from '@material-ui/core';
-import Task from './components/Todo/Todo';
+import Todo from './components/Todo/Todo';
 import { Todo as ITodo } from './components/Todo/typings';
 
 const App: FC = () => {
   const [todoList, setTodoList] = useState<ITodo[]>([]);
-  const [input, setInput] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [newTodoName, setNewTodoName] = useState<string>('');
+  const [inputTodoError, setInputTodoError] = useState<string>('');
 
-  const addTask = () => {
-    if (!input || input.length < 6 || input.length > 20) {
-      setError('Entrada inválida (digite de 6 a 20 caracteres)');
-    } else {
-      setTodoList([{
-        title: input,
-        done: false,
-      }, ...todoList])
-      setError('');
-    }
-  };
-
-  const changeStatus = (position: number) => {
-    setTodoList(
-      todoList.map((task, index) => index === position
-        ? Object.assign(task, { done: !task.done })
-        : task)
-    )
+  const changeTodoNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTodoName(event.target.value);
   }
 
-  const removeTask = (position: number) => {
-    setTodoList(todoList.filter((value, index) => index !== position))
+  const addTodoHandler = () => {
+    const hasNewTodoAnInvalidName = !newTodoName || newTodoName.length < 6 || newTodoName.length > 20;
+    if (hasNewTodoAnInvalidName) {
+      setInputTodoError('Entrada inválida (digite de 6 a 20 caracteres)');
+      return;
+    } 
+    const newTodo: ITodo = {
+      title: newTodoName,
+      done: false,
+    };
+    const newTodoList = [newTodo, ...todoList];
+    setTodoList(newTodoList);
   };
+
+  const changeTodoStatus = (position: number) => {
+    const currentTodo = todoList[position];
+    todoList[position] = { ...currentTodo, done: !currentTodo.done }
+    setTodoList(todoList);
+  }
+
+  const removeTodoHandler = (position: number) => setTodoList(todoList.filter((_, index) => index !== position));
   
   return (
     <>
@@ -58,19 +60,16 @@ const App: FC = () => {
             sx={{
               mr: 'auto',
             }}
-            error={!!error}
-            value={input}
-            onChange={(event) => {
-              setInput(event.target.value);
-            }}
+            error={!!inputTodoError}
+            value={newTodoName}
+            onChange={changeTodoNameHandler}
             data-testid="add-task-input"
-            id="filled-error-helper-text"
             label="Nova Tarefa"
-            helperText={error}
+            helperText={inputTodoError}
             variant="filled"
           />
           <Button
-            onClick={addTask}
+            onClick={addTodoHandler}
             data-testid="add-task-btn"
             variant="contained"
             color="primary"
@@ -88,11 +87,11 @@ const App: FC = () => {
         }}>
           {
             todoList.map((todo, index) => (
-              <Task 
+              <Todo
                 id={index}
                 todo={todo}
-                onRemove={removeTask}
-                onToggle={changeStatus}
+                onRemove={removeTodoHandler}
+                onToggle={changeTodoStatus}
               />
             ))
           }

@@ -1,15 +1,21 @@
-import React from 'react';
-import { Card, Button, CardContent, Typography, CardActions } from '@material-ui/core';
+import React, { FC } from 'react';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from '@material-ui/core';
 import { TodoProps } from './typings';
 
-const Task = ({id, todo, onRemove, onToggle}: TodoProps) => {
+const Todo: FC<TodoProps> = ({id, todo, onRemove, onToggle}: TodoProps) => {
   const { title, done } = todo;
-  const statusLabel = () => done ? 'Reativar' : 'Completar';
+  const statusLabel = done ? 'Reativar' : 'Completar';
   const opacity = done ? '0.5' : 1;
 
   return (
     <Card      
-      data-testid="task-item"
+      data-testid={`todo-${id}`}
       key={id}
       variant="outlined"
       sx={{
@@ -19,7 +25,7 @@ const Task = ({id, todo, onRemove, onToggle}: TodoProps) => {
     >
       <CardContent>
         <Typography
-          data-testid="task-label"
+          data-testid={`todo-label-${id}`}
           variant="h5"
           component="h2"
         >
@@ -34,14 +40,14 @@ const Task = ({id, todo, onRemove, onToggle}: TodoProps) => {
       >
         <Button          
           onClick={() => onToggle(id)}
-          data-testid="end-task-btn"
+          data-testid={`toggle-todo-${id}`}
           color="primary"
         >
-          { statusLabel() }
+          { statusLabel }
         </Button>
         <Button
           onClick={() => onRemove(id)}
-          data-testid="remove-task-btn"
+          data-testid={`remove-todo-${id}`}
           variant="contained"
           color="error"
         >
@@ -52,5 +58,5 @@ const Task = ({id, todo, onRemove, onToggle}: TodoProps) => {
   )
 };
     
-export default Task;
+export default Todo;
     

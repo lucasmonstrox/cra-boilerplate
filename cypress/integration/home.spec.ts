@@ -15,8 +15,7 @@ it('should redirect to home page', () => {
 it('should create a new task', () => {
   getInput().type('Created by Cypress');
   getAddButton().click();
-  getTodo().its('length').should('eq', 1);
-  cy.get('[data-testid="task-label"').contains('Created by Cypress');
+  getTodo().should('be.visible');
 });
 
 it('should complete the task', () => {

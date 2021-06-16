@@ -1,18 +1,20 @@
 import React from 'react';
 import { Card, Button, CardContent, Typography, CardActions } from '@material-ui/core';
 import { TaskProps } from '../utils/Interfaces';
-import useStyles from '../styles/styles';
 
 const Task = ({id, title, done, changeStatus, removeTask}: TaskProps) => {
   const statusLabel = () => done ? 'Reativar' : 'Completar';
-  const styles = useStyles();
+  const opacity = done ? '0.5' : 1;
 
   return (
-    <Card
-      className={`${styles.card} ${done ? styles.disabled : ''}`}
+    <Card      
       data-testid="task-item"
       key={id}
       variant="outlined"
+      sx={{
+        width: '300px',
+        opacity,
+      }}
     >
       <CardContent>
         <Typography
@@ -23,12 +25,15 @@ const Task = ({id, title, done, changeStatus, removeTask}: TaskProps) => {
           {title}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
-          className={styles.toLeft}
+      <CardActions
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Button          
           onClick={() => changeStatus(id)}
           data-testid="end-task-btn"
-          variant="contained"
           color="primary"
         >
           { statusLabel() }
@@ -37,7 +42,7 @@ const Task = ({id, title, done, changeStatus, removeTask}: TaskProps) => {
           onClick={() => removeTask(id)}
           data-testid="remove-task-btn"
           variant="contained"
-          color="secondary"
+          color="error"
         >
           Apagar
         </Button>

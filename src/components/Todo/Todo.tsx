@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Button, CardContent, Typography, CardActions } from '@material-ui/core';
-import { TaskProps } from '../utils/Interfaces';
+import { TodoProps } from './typings';
 
-const Task = ({id, title, done, changeStatus, removeTask}: TaskProps) => {
+const Task = ({id, todo, onRemove, onToggle}: TodoProps) => {
+  const { title, done } = todo;
   const statusLabel = () => done ? 'Reativar' : 'Completar';
   const opacity = done ? '0.5' : 1;
 
@@ -32,14 +33,14 @@ const Task = ({id, title, done, changeStatus, removeTask}: TaskProps) => {
         }}
       >
         <Button          
-          onClick={() => changeStatus(id)}
+          onClick={() => onToggle(id)}
           data-testid="end-task-btn"
           color="primary"
         >
           { statusLabel() }
         </Button>
         <Button
-          onClick={() => removeTask(id)}
+          onClick={() => onRemove(id)}
           data-testid="remove-task-btn"
           variant="contained"
           color="error"

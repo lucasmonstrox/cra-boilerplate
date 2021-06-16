@@ -6,11 +6,11 @@ import {
   CssBaseline,
   TextField,
 } from '@material-ui/core';
-import Task from './components/Task';
-import { TaskInterface } from './utils/Interfaces';
+import Task from './components/Todo/Todo';
+import { Todo as ITodo } from './components/Todo/typings';
 
 const App: FC = () => {
-  const [todoList, setTodoList] = useState<TaskInterface[]>([]);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
   const [input, setInput] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -87,13 +87,12 @@ const App: FC = () => {
           gap: 1,
         }}>
           {
-            todoList.map((task, index) => (
+            todoList.map((todo, index) => (
               <Task 
                 id={index}
-                title={task.title}
-                done={task.done}
-                removeTask={removeTask}
-                changeStatus={changeStatus}
+                todo={todo}
+                onRemove={removeTask}
+                onToggle={changeStatus}
               />
             ))
           }

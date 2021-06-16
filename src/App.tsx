@@ -33,10 +33,12 @@ const App: FC = () => {
   };
 
   const changeTodoStatus = (position: number) => {
-    const currentTodo = todoList[position];
-    todoList[position] = { ...currentTodo, done: !currentTodo.done }
-    setTodoList(todoList);
-  }
+    const updatedTodoList = todoList.map((todo, index) =>
+      index === position
+      ? Object.assign(todo, {done: !todo.done}) 
+      : todo);
+    setTodoList(updatedTodoList);
+  };
 
   const removeTodoHandler = (position: number) => setTodoList(todoList.filter((_, index) => index !== position));
   
@@ -88,6 +90,7 @@ const App: FC = () => {
           {
             todoList.map((todo, index) => (
               <Todo
+                key={Number(index)}
                 id={index}
                 todo={todo}
                 onRemove={removeTodoHandler}

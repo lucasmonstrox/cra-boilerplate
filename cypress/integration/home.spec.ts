@@ -1,10 +1,12 @@
+const getTaskInput = () => cy.get('[data-testid="add-task-input"]');
+
 it('should redirect to home page', () => {
   cy.visit('/');
   cy.location('pathname').should('eq', '/');
 });
 
 it('should create a new task', () => {
-  cy.get('[data-testid="add-task-input"]').type('Created by Cypress');
+  getTaskInput().type('Created by Cypress');
   cy.get('[data-testid="add-task-btn"]').click();
   cy.get('[data-testid="task-item"]').its('length').should('eq', 1);
   cy.get('[data-testid="task-label"').contains('Created by Cypress');
@@ -33,7 +35,7 @@ it('should not add a task with empty field', () => {
 });
 
 it('should not add a task with less than 6 characters', () => {
-  cy.get('[data-testid="add-task-input"]').type('abcde');
+  getTaskInput().type('abcde');
   cy.get('[data-testid="add-task-btn"]').click();
   cy.get('[data-testid="task-item"]').should('not.exist');
   cy.get('[data-testid="add-task-input"').contains('Entrada inválida (digite de 6 a 20 caracteres)');
@@ -42,7 +44,7 @@ it('should not add a task with less than 6 characters', () => {
 
 it('should not add a task with more than 20 characters', () => {
   cy.get('[data-testid="add-task-input"] input').clear();
-  cy.get('[data-testid="add-task-input"]').type('abcdeabcdeabcdeabcdea');
+  getTaskInput().type('abcdeabcdeabcdeabcdea');
   cy.get('[data-testid="add-task-btn"]').click();
   cy.get('[data-testid="task-item"]').should('not.exist');
   cy.get('[data-testid="add-task-input"').contains('Entrada inválida (digite de 6 a 20 caracteres)');

@@ -4,7 +4,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import App from './App';
-import apolloClient from './services/apolloClient';
+import apolloClient from './providers/apolloClient';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

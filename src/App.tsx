@@ -1,49 +1,63 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import {
   CssBaseline,
   Box,
   Grid,
   makeStyles,
-  TextField,
   InputLabel,
-  Button
+  Button,
+  List
 } from '@material-ui/core';
 
-// import Task from './Components/Task';
+
+import { Formik, Form, Field } from 'formik'
+
+import Task from './Components/Task';
 import apiGraphql from './Services/apiGraphql';
+import schema from './Components/Validation/schema';
+import Error from './Components/Helper/Error';
+// import Success from './Components/Helper/Success';
 
 const useStyles = makeStyles({
   root: {
     height: '100vh',
     padding: '5rem',
   },
-  containerInputs: {
-    marginBottom: '1rem'
-  },
   labelInput: {
-    marginBottom: '.3rem'
+    marginBottom: '.3rem',
+    marginTop: '1rem',
   },
   grid: {
     padding: '0 1rem'
   },
   textField: {
     width: '100%',
-    marginBottom: '1rem'
+    padding: '.5rem'
   },
   buttonSubmited: {
-    width: '100%'
+    width: '100%',
+    marginTop: '1rem',
   }
 })
 
 
 const App: FC = () => {
 
-  // const [tasks, setTasks] = useState([{
-  //   title: 'Go to shopping'
-  // }])
+  const [tasks] = useState([{
+    title: 'Tarefa 1',
+  }, {
+    title: 'Tarefa 2'
+  }])
 
   const classes = useStyles()
+
+  const handleSubmit = (values: any, actions: any) => {
+
+    console.log(values)
+    console.log(actions)
+
+  }
 
   return (
     <ApolloProvider client={apiGraphql}>
@@ -51,37 +65,54 @@ const App: FC = () => {
       <Box className={classes.root}>
         <Grid container>
           <Grid item xs={12} sm={6} className={classes.grid}>
-            <form>
-                <InputLabel
-                  className={classes.labelInput}
-                  htmlFor="titleTask">
-                  Título
-                </InputLabel>
-                <TextField
-                  id="titleTask"
-                  classes={{ root: classes.textField }}
-                  variant="outlined"
-                />
-                <InputLabel
-                  className={classes.labelInput}
-                  htmlFor="descriptionTask">
-                  Descrição
-                </InputLabel>
-                <TextField
-                  id="descriptionTask"
-                  classes={{ root: classes.textField }}
-                  variant="outlined"
-                />
-                <Button variant="contained" color="secondary" className={classes.buttonSubmited}>
-                  Primary
-                </Button>
-            </form>
+            <Formik
+              initialValues={{
+                title: ''
+              }}
+              onSubmit={handleSubmit}
+              validationSchema={schema}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <InputLabel
+                    className={classes.labelInput}
+                    htmlFor="titleTask">
+                    Título
+                  </InputLabel>
+                  <Field
+                    id="title"
+                    name="title"
+                    type="text"
+                    className={classes.textField}
+                    data-testid="taskTitle"
+                  />
+                  {errors.title && touched.title && (
+                    <Error message={errors.title} />
+                  )}
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.buttonSubmited}
+                    type="submit"
+                  >
+                    Adicionar tarefa
+                  </Button>
+                </Form>
+              )}
+            </Formik>
           </Grid>
           <Grid item xs={12} sm={6}>
-            ok
+            <List>
+              {
+                tasks.map((task: any) => (
+                  <Task task={task} />
+                ))
+              }
+            </List>
           </Grid>
         </Grid>
       </Box>
+      {/* <Success /> */}
       {/* <TextField name="task" data-testid="task" onChange={taskChangeHandler} />
       {
         isSubmitted && taskName === '' &&

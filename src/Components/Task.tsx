@@ -1,15 +1,38 @@
 import React, { FC } from 'react'
+import { ListItem, Checkbox, makeStyles, Box } from '@material-ui/core'
+
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const useStyles = makeStyles({
+    listItem: {
+        marginBottom: '.5rem'
+    },
+    containerIcon: {
+        marginLeft: 'auto',
+        cursor: 'pointer'
+    }
+})
 
 interface Props {
-    task: any,
-    onRemove: any
+    task: any
 }
 
-const Task: FC<Props> = ({task, onRemove}: Props) => (
-    <>
+const Task: FC<Props> = ({ task }: Props) => {
+
+
+    const classes = useStyles()
+
+    return (
+    <ListItem classes={{ root: classes.listItem }}>
+        <Checkbox
+            inputProps={{ 'aria-label': 'primary checkbox' }}
+        />
         <p>{task.title}</p>
-        <button type="button" onClick={() => onRemove(task)}>Remover</button>
-    </>
-)
+
+        <Box className={classes.containerIcon}>
+            <DeleteIcon />
+        </Box>
+    </ListItem>
+)}
 
 export default Task

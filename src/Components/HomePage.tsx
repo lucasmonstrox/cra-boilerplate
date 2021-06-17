@@ -9,7 +9,6 @@ import Task from './Task';
 import TaskForm, { ITask } from './TaskForm';
 
 const HomePage: FC = () => {
-
     const [tasks, setTasks] = useState([{
         title: 'Tarefa 1',
         taskId: Math.random()

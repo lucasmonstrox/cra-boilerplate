@@ -70,4 +70,4 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
     )
 }
 
-export default TaskForm
+export default TaskForm;

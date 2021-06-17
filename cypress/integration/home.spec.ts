@@ -1,4 +1,4 @@
-it('Should raise an error when the input is empty ', () => {
+it('should appear title error message when title input is empty', () => {
     cy.visit('/');
     cy.get('[data-testid="taskTitle"]').click()
     cy.contains('Adicionar tarefa').click()

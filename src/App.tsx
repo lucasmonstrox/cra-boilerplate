@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import { CssBaseline } from '@material-ui/core';
 
 import { ApolloProvider } from '@apollo/client';

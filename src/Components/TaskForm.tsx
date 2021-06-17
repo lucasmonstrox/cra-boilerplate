@@ -22,9 +22,7 @@ export interface ITask {
 interface IMethods {
     resetForm: Function
 }
-
 const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
-
     const handleSubmitAddTask = (values: ITask, { resetForm }: IMethods) => {
         resetForm()
         onTaskAdded(values)

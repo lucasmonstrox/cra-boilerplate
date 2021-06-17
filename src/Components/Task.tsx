@@ -40,8 +40,8 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
             </Typography>
             <Box
                 sx={{
+                    cursor: 'pointer',
                     ml: 'auto',
-                    cursor: 'pointer'
                 }}
                 onClick={() => onRemove(task.taskId)}
                 data-testid="button-remove-task"

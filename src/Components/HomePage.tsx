@@ -34,7 +34,8 @@ const HomePage: FC = () => {
     };
 
     const closeModalHandler = (_: any, reason: string) => {
-        if (reason === 'clickaway') {
+        const isClickIngAway = reason === 'clickaway'
+        if (isClickIngAway) {
             return;
         };
         setInfoMessageModal('');

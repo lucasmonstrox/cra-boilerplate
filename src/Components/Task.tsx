@@ -18,7 +18,7 @@ interface Props {
 const Task: FC<Props> = ({ task, onRemove }: Props) => {
     const [taskChecked, setTaskChecked] = useState(false)
 
-    function toggleTaskChecked() {
+    const toggleTaskChecked = () => {
         setTaskChecked((prevState) => !prevState)
     }
 

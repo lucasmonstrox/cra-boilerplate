@@ -2,56 +2,50 @@ import {
   getInput,
   getInputField,
   getAddButton,
-  getTodo,
-  getTodoRemoveButton,
-  getTodoToggleButton,
+  getTodoItem,
+  getToggleTodoButton,
+  getRemoveTodoButton,
 } from '../support/po/home.po';
 
-it('should redirect to home page', () => {
+it('should not add a task when field is empty', () => {
   cy.visit('/');
-  cy.location('pathname').should('eq', '/');
-});
-
-it('should create a new task', () => {
-  getInput().type('Created by Cypress');
-  getAddButton().click();
-  getTodo().should('be.visible');
-});
-
-it('should complete the task', () => {
-  getTodoToggleButton().click();
-  getTodo().should('have.css', 'opacity', '0.5');
-});
-
-it('should reactivate the task', () => {
-  getTodoToggleButton().click();
-  getTodo().should('have.css', 'opacity', '1');
-});
-
-it('should remove the task', () => {
-  getTodoRemoveButton().click();
-  getTodo().should('not.exist');
-});
-
-it('should not add a task with empty field', () => {
   getInputField().clear();
   getAddButton().click();
-  getTodo().should('not.exist');
-  getInput().contains('Entrada inválida (digite de 6 a 20 caracteres)');
+  getTodoItem().should('not.exist');
 });
 
-it('should not add a task with less than 6 characters', () => {
+it('should not add a task when field has less than 6 characters', () => {
   getInput().type('abcde');
   getAddButton().click();
-  getTodo().should('not.exist');
-  getInput().contains('Entrada inválida (digite de 6 a 20 caracteres)');
+  getTodoItem().should('not.exist');
 });
 
 
-it('should not add a task with more than 20 characters', () => {
+it('should not add a task when field has more than 20 characters', () => {
   getInputField().clear();
   getInput().type('abcdeabcdeabcdeabcdea');
   getAddButton().click();
-  getTodo().should('not.exist');
-  getInput().contains('Entrada inválida (digite de 6 a 20 caracteres)');
+  getTodoItem().should('not.exist');
+});
+
+it('should create a new task when field is valid', () => {
+  getInputField().clear();
+  getInput().type('Created by Cypress');
+  getAddButton().click();
+  getTodoItem().should('be.visible');
+});
+
+it('should complete the task when it was created', () => {
+  getToggleTodoButton().click();
+  getTodoItem().should('have.css', 'opacity', '0.5');
+});
+
+it('should reactivate the task when it was completed', () => {
+  getToggleTodoButton().click();
+  getTodoItem().should('have.css', 'opacity', '1');
+});
+
+it('should remove the task when it was created', () => {
+  getRemoveTodoButton().click();
+  getTodoItem().should('not.exist');
 });

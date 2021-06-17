@@ -10,4 +10,4 @@ interface TodoProps {
   onToggle: Function;
 };
 
-export { Todo as ITodo, TodoProps };
+export type { Todo, TodoProps };

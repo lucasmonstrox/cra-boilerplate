@@ -5,7 +5,6 @@ import {
     ListItem,
     Typography
 } from '@material-ui/core'
-
 import DeleteIcon from '@material-ui/icons/Delete';
 
 interface Props {

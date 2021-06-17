@@ -32,7 +32,7 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
             <Typography
                 component="h4"
                 sx={{
-                    textDecoration: `${taskChecked && 'line-through'}`
+                    textDecoration: taskChecked && 'line-through'
                 }}
                 data-testid="text-title-task"
             >

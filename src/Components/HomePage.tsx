@@ -54,11 +54,9 @@ const HomePage: FC = () => {
         >
             <TaskForm onTaskAdded={taskAddedHandler} />
             <List>
-                {
-                    tasks.map((task: any) => (
-                        <Task key={task.taskId} task={task} onRemove={removeTaskHandler} />
-                    ))
-                }
+                {tasks.map((task: any) => (
+                    <Task key={task.taskId} task={task} onRemove={removeTaskHandler} />
+                ))}
             </List>
             <Snackbar
                 anchorOrigin={{

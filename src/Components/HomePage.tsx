@@ -4,9 +4,7 @@ import {
     List,
     Snackbar
 } from '@material-ui/core';
-
 import MuiAlert from '@material-ui/core/Alert';
-
 import Task from './Task';
 import TaskForm, { ITask } from './TaskForm';
 

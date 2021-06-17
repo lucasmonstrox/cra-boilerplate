@@ -7,7 +7,7 @@ import {
     InputLabel,
 } from '@material-ui/core';
 
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik'
 
 import schema from './Validation/schema';
 
@@ -18,12 +18,8 @@ interface Props {
 export interface ITask {
     title: string
 }
-
-interface IMethods {
-    resetForm: Function
-}
 const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
-    const handleSubmitAddTask = (values: ITask, { resetForm }: IMethods) => {
+    const handleSubmitAddTask = (values: ITask, { resetForm }: FormikHelpers<ITask>) => {
         resetForm()
         onTaskAdded(values)
     }

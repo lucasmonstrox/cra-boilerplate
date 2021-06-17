@@ -29,14 +29,14 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
             <Checkbox
                 inputProps={{ 'aria-label': 'primary checkbox' }}
                 onChange={toggleTaskChecked}
-                data-testid="btnChecked"
+                data-testid="button-checked-task"
             />
             <Typography
                 component="h4"
                 sx={{
                     textDecoration: `${taskChecked && 'line-through'}`
                 }}
-                data-testid="textChecked"
+                data-testid="text-title-task"
             >
                 {task.title}
             </Typography>
@@ -46,7 +46,7 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
                     cursor: 'pointer'
                 }}
                 onClick={() => onRemove(task.taskId)}
-                data-testid="btnRemove"
+                data-testid="button-remove-task"
             >
                 <DeleteIcon />
             </Box>

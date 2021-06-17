@@ -12,51 +12,33 @@ const HomePage: FC = () => {
     const [tasks, setTasks] = useState([{
         title: 'Tarefa 1',
         taskId: Math.random()
-    }])
+    }]);
 
-    const [modalActionTask, setModalActionTask] = useState({
-        status: false,
-        message: ''
-    })
+    const [infoMessageModal, setInfoMessageModal] = useState('');
 
-    const taskAddedHandler = (values: ITask ) => {
-        
+    const taskAddedHandler = (values: ITask) => {
         setTasks((prevState) => [
             {
                 title: values.title,
                 taskId: Math.random()
             },
             ...prevState
-        ])
-        setModalActionTask({
-            status: true,
-            message: 'Tarefa adicionada com sucesso.'
-        })
-    }
+        ]);
+        setInfoMessageModal('Tarefa adicionada com sucesso.')
+    };
 
     const removeTaskHandler = (taskId: number) => {
-
-        const newTasks = tasks.filter((task) => task.taskId !== taskId)
-
-        setTasks(newTasks)
-
-        setModalActionTask({
-            status: true,
-            message: 'Tarefa removida com sucesso.'
-        })
-    }
+        const newTasks = tasks.filter((task) => task.taskId !== taskId);
+        setTasks(newTasks);
+        setInfoMessageModal('Tarefa removida com sucesso.');
+    };
 
     const handleClose = (_: any, reason: string) => {
         if (reason === 'clickaway') {
             return;
-        }
-
-        setModalActionTask({
-            status: false,
-            message: ''
-        });
+        };
+        setInfoMessageModal('');
     };
-
 
     return (
         <Box
@@ -69,25 +51,25 @@ const HomePage: FC = () => {
                 flexDirection: 'column',
             }}
         >
-                <TaskForm onTaskAdded={taskAddedHandler} />
-                <List>
-                    {
-                        tasks.map((task: any) => (
-                            <Task key={task.taskId} task={task} onRemove={removeTaskHandler} />
-                        ))
-                    }
-                </List>
+            <TaskForm onTaskAdded={taskAddedHandler} />
+            <List>
+                {
+                    tasks.map((task: any) => (
+                        <Task key={task.taskId} task={task} onRemove={removeTaskHandler} />
+                    ))
+                }
+            </List>
             <Snackbar
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
                 }}
-                open={modalActionTask.status}
+                open={!!infoMessageModal}
                 autoHideDuration={2500}
                 onClose={handleClose}
             >
                 <MuiAlert elevation={6} variant="filled" severity="success" data-testid="modal-msg-action-task">
-                    {modalActionTask.message}
+                    {infoMessageModal}
                 </MuiAlert>
             </Snackbar>
         </Box >

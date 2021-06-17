@@ -13,7 +13,7 @@ const TWO_SECONDS_AND_HALF = 2500;
 const HomePage: FC = () => {
     const [tasks, setTasks] = useState([{
         title: 'Tarefa 1',
-        taskId: Math.random()
+        id: Math.random()
     }]);
 
     const [infoMessageModal, setInfoMessageModal] = useState('');
@@ -22,15 +22,15 @@ const HomePage: FC = () => {
         setTasks((prevState) => [
             {
                 title: values.title,
-                taskId: Math.random()
+                id: Math.random()
             },
             ...prevState
         ]);
         setInfoMessageModal('Tarefa adicionada com sucesso.');
     };
 
-    const removeTaskHandler = (taskId: number) => {
-        const newTasks = tasks.filter((task) => task.taskId !== taskId);
+    const removeTaskHandler = (id: number) => {
+        const newTasks = tasks.filter((task) => task.id !== id);
         setTasks(newTasks);
         setInfoMessageModal('Tarefa removida com sucesso.');
     };
@@ -56,7 +56,7 @@ const HomePage: FC = () => {
             <TaskForm onTaskAdded={taskAddedHandler} />
             <List>
                 {tasks.map((task: any) => (
-                    <Task key={task.taskId} task={task} onRemove={removeTaskHandler} />
+                    <Task key={task.id} task={task} onRemove={removeTaskHandler} />
                 ))}
             </List>
             <Snackbar

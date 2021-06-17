@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 interface Props {
     task: {
         title: string,
-        taskId: number
+        id: number
     },
     onRemove: Function
 }
@@ -43,7 +43,7 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
                     cursor: 'pointer',
                     ml: 'auto',
                 }}
-                onClick={() => onRemove(task.taskId)}
+                onClick={() => onRemove(task.id)}
                 data-testid="button-remove-task"
             >
                 <DeleteIcon />

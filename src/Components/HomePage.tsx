@@ -72,7 +72,7 @@ const HomePage: FC = () => {
                     {infoMessageModal}
                 </MuiAlert>
             </Snackbar>
-        </Grid >
+        </Grid>
     )
 }
 

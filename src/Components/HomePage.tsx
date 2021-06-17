@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import {
-    Box,
+    Grid,
     List,
     Snackbar
 } from '@material-ui/core';
@@ -42,15 +42,14 @@ const HomePage: FC = () => {
     };
 
     return (
-        <Box
+        <Grid
             sx={{
                 height: '100%',
                 width: '50vw',
                 pt: '5rem',
                 margin: '0 auto',
-                display: 'flex',
-                flexDirection: 'column',
             }}
+            direction="column"
         >
             <TaskForm onTaskAdded={taskAddedHandler} />
             <List>
@@ -71,7 +70,7 @@ const HomePage: FC = () => {
                     {infoMessageModal}
                 </MuiAlert>
             </Snackbar>
-        </Box >
+        </Grid >
     )
 }
 

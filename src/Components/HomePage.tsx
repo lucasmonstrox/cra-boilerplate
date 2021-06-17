@@ -33,7 +33,7 @@ const HomePage: FC = () => {
         setInfoMessageModal('Tarefa removida com sucesso.');
     };
 
-    const handleClose = (_: any, reason: string) => {
+    const closeModalHandler = (_: any, reason: string) => {
         if (reason === 'clickaway') {
             return;
         };
@@ -66,7 +66,7 @@ const HomePage: FC = () => {
                 }}
                 open={!!infoMessageModal}
                 autoHideDuration={2500}
-                onClose={handleClose}
+                onClose={closeModalHandler}
             >
                 <MuiAlert elevation={6} variant="filled" severity="success" data-testid="modal-msg-action-task">
                     {infoMessageModal}

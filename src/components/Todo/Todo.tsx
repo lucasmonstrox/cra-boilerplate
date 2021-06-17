@@ -9,7 +9,7 @@ import {
 import { TodoProps } from './typings';
 
 const Todo: FC<TodoProps> = ({id, todo, onRemove, onToggle}: TodoProps) => {
-  const { title, done } = todo;
+  const { name, done } = todo;
   const statusLabel = done ? 'Reativar' : 'Completar';
   const opacity = done ? '0.5' : 1;
 
@@ -19,8 +19,8 @@ const Todo: FC<TodoProps> = ({id, todo, onRemove, onToggle}: TodoProps) => {
       key={id}
       variant="outlined"
       sx={{
-        width: '300px',
         opacity,
+        width: '300px',
       }}
     >
       <CardContent>
@@ -29,7 +29,7 @@ const Todo: FC<TodoProps> = ({id, todo, onRemove, onToggle}: TodoProps) => {
           variant="h5"
           component="h2"
         >
-          {title}
+          {name}
         </Typography>
       </CardContent>
       <CardActions
@@ -59,4 +59,3 @@ const Todo: FC<TodoProps> = ({id, todo, onRemove, onToggle}: TodoProps) => {
 };
     
 export default Todo;
-    

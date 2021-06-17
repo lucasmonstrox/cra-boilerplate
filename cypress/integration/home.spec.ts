@@ -1,11 +1,12 @@
 const getTaskTitleInput = () => cy.get('[data-testid="task-title-input"]');
 const getAddTaskButton = () => cy.get('[data-testid="add-task-button"]');
+const getTitleMsgError = () => cy.get('[data-testid="title-msg-error"]')
 
 it.only('should appear title error message when title input is empty', () => {
     cy.visit('/');
     getTaskTitleInput().click()
     getAddTaskButton().click()
-    cy.contains('O título é obrigatório')
+    getTitleMsgError().should('be.visible')
 })
 
 it('Should throw an error when the input is less than five characters', () => {

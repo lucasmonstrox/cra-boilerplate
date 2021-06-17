@@ -5,7 +5,6 @@ import apiGraphql from './Services/GraphClient';
 import HomePage from './Components/HomePage';
 
 const App: FC = () =>  (
-
     <ApolloProvider client={apiGraphql}>
       <CssBaseline />
       <HomePage />

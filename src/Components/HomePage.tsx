@@ -8,6 +8,8 @@ import MuiAlert from '@material-ui/core/Alert';
 import Task from './Task';
 import TaskForm, { ITask } from './TaskForm';
 
+const TWO_SECONDS_AND_HALF = 2500;
+
 const HomePage: FC = () => {
     const [tasks, setTasks] = useState([{
         title: 'Tarefa 1',
@@ -63,7 +65,7 @@ const HomePage: FC = () => {
                     horizontal: 'right',
                 }}
                 open={!!infoMessageModal}
-                autoHideDuration={2500}
+                autoHideDuration={TWO_SECONDS_AND_HALF}
                 onClose={closeModalHandler}
             >
                 <MuiAlert elevation={6} variant="filled" severity="success" data-testid="modal-msg-action-task">

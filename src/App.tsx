@@ -10,4 +10,5 @@ const App: FC = () => (
     <HomePage />
   </ApolloProvider>
 )
+
 export default App;

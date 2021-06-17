@@ -1,6 +1,8 @@
-it('should appear title error message when title input is empty', () => {
+const getTaskTitleInput = () => cy.get('[data-testid="task-title-input"]');
+
+it.only('should appear title error message when title input is empty', () => {
     cy.visit('/');
-    cy.get('[data-testid="taskTitle"]').click()
+    getTaskTitleInput().click()
     cy.contains('Adicionar tarefa').click()
     cy.contains('O título é obrigatório')
 })

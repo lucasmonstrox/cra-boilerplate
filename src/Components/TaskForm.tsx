@@ -51,7 +51,7 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
                             name="title"
                             type="text"
                             style={{ width: '100%', padding: '.5rem' }}
-                            data-testid="taskTitle"
+                            data-testid="task-title-input"
                         />
                         <Box sx={{ color: 'red', mt: '.3rem' }}>
                             <ErrorMessage name="title" />

@@ -42,7 +42,7 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
                     id="title"
                     name="title"
                     type="text"
-                    style={{ width: '100%' }}
+                    fullWidth
                     data-testid="task-title-input"
                     value={values.title}
                     onChange={handleChange}

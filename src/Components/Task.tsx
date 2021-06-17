@@ -30,11 +30,11 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
                 onChange={toggleTaskChecked}
             />
             <Typography
+                data-testid="text-title-task"
                 component="h4"
                 sx={{
-                    textDecoration: taskChecked && 'line-through'
+                    textDecoration: `${taskChecked && 'line-through'}`
                 }}
-                data-testid="text-title-task"
             >
                 {task.title}
             </Typography>

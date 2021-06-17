@@ -1,11 +1,13 @@
-export interface Todo {
+interface Todo {
+  id: number;
   name: string;
   done: Boolean;
 };
 
-export interface TodoProps {
-  id: number;
+interface TodoProps {
   todo: Todo;
   onRemove: Function;
   onToggle: Function;
 };
+
+export { Todo as ITodo, TodoProps };

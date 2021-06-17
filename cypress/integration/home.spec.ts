@@ -1,3 +1,4 @@
+import * as faker from 'faker';
 import {
   getInputs,
   getInputsFields,
@@ -15,7 +16,7 @@ it('should not add a task when field is empty', () => {
 });
 
 it('should not add a task when field has less than 6 characters', () => {
-  getInputs().type('abcde');
+  getInputs().type(faker.random.words(1).substring(0, 4));
   getAddButtons().click();
   getTodoItems().should('not.exist');
 });
@@ -23,14 +24,14 @@ it('should not add a task when field has less than 6 characters', () => {
 
 it('should not add a task when field has more than 20 characters', () => {
   getInputsFields().clear();
-  getInputs().type('abcdeabcdeabcdeabcdea');
+  getInputs().type(faker.random.words(6).substring(0, 21));
   getAddButtons().click();
   getTodoItems().should('not.exist');
 });
 
 it('should create a new task when field is valid', () => {
   getInputsFields().clear();
-  getInputs().type('Created by Cypress');
+  getInputs().type(faker.random.words(3).substring(0, 19));
   getAddButtons().click();
   getTodoItems().should('be.visible');
 });

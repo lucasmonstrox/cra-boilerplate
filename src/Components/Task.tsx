@@ -25,9 +25,9 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
     return (
         <ListItem sx={{ mb: 1 }} >
             <Checkbox
+                data-testid="button-checked-task"
                 inputProps={{ 'aria-label': 'primary checkbox' }}
                 onChange={toggleTaskChecked}
-                data-testid="button-checked-task"
             />
             <Typography
                 component="h4"

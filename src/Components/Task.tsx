@@ -23,7 +23,7 @@ const Task: FC<Props> = ({ task, onRemove }: Props) => {
     }
 
     return (
-        <ListItem sx={{ mb: '.5rem' }} >
+        <ListItem sx={{ mb: 1 }} >
             <Checkbox
                 inputProps={{ 'aria-label': 'primary checkbox' }}
                 onChange={toggleTaskChecked}

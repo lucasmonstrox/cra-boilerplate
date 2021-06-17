@@ -76,4 +76,4 @@ const HomePage: FC = () => {
     )
 }
 
-export default HomePage
+export default HomePage;

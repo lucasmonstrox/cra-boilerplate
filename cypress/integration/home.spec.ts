@@ -1,9 +1,10 @@
 const getTaskTitleInput = () => cy.get('[data-testid="task-title-input"]');
+const getAddTodoButton = () => cy.get('[data-testid="add-todo-button"]');
 
 it.only('should appear title error message when title input is empty', () => {
     cy.visit('/');
     getTaskTitleInput().click()
-    cy.contains('Adicionar tarefa').click()
+    getAddTodoButton().click()
     cy.contains('O título é obrigatório')
 })
 

@@ -64,6 +64,7 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
                                 mt: 2
                             }}
                             type="submit"
+                            data-testid="add-todo-button"
                         >
                             Adicionar tarefa
                         </Button>

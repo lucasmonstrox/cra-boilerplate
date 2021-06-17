@@ -26,7 +26,7 @@ const HomePage: FC = () => {
             },
             ...prevState
         ]);
-        setInfoMessageModal('Tarefa adicionada com sucesso.')
+        setInfoMessageModal('Tarefa adicionada com sucesso.');
     };
 
     const removeTaskHandler = (taskId: number) => {

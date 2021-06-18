@@ -6,7 +6,8 @@ import {
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
 import Task from './Task';
-import TaskForm, { ITask } from './TaskForm';
+import TaskForm from './TaskForm';
+import { ITask } from '../interfaces/task'
 
 const TWO_SECONDS_AND_HALF = 2500;
 

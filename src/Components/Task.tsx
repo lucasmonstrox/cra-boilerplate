@@ -6,16 +6,9 @@ import {
     Typography
 } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
+import { PropsTask } from '../interfaces/task'
 
-interface Props {
-    task: {
-        title: string,
-        id: number
-    },
-    onRemove: Function
-}
-
-const Task: FC<Props> = ({ task, onRemove }: Props) => {
+const Task: FC<PropsTask> = ({ task, onRemove }: PropsTask) => {
     const [taskChecked, setTaskChecked] = useState(false)
 
     const toggleTaskChecked = () => {

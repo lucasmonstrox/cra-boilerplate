@@ -38,7 +38,7 @@ const HomePage: FC = () => {
         setInfoMessageModal('Tarefa removida com sucesso.');
     };
 
-    const closeModalHandler = (_: any, reason: string) => {
+    const closeModalHandler = (_: unknown, reason: string) => {
         const isClickIngAway = reason === 'clickaway';
         if (isClickIngAway) {
             return;

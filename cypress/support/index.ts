@@ -18,3 +18,14 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Custom command to select DOM element by data-cy attribute.
+     * @example cy.dataCy('greeting')
+     */
+    mockGql(operationName: string, data: unknown);
+  }
+}

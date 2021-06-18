@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import {
   Button,
   Card,
@@ -8,13 +8,13 @@ import {
 } from '@material-ui/core';
 import { TodoProps } from './typings';
 
-const Todo: FC<TodoProps> = ({todo, onRemove, onToggle}: TodoProps) => {
+const Todo = ({ todo, onDelete, onToggle }: TodoProps) => {
   const { id, name, done } = todo;
   const statusLabel = done ? 'Reativar' : 'Completar';
   const opacity = done ? 0.5 : 1;
 
   return (
-    <Card      
+    <Card
       data-testid={`todo-${id}`}
       sx={{
         opacity,
@@ -23,33 +23,24 @@ const Todo: FC<TodoProps> = ({todo, onRemove, onToggle}: TodoProps) => {
       variant="outlined"
     >
       <CardContent>
-        <Typography
-          data-testid={`todo-label-${id}`}
-          component="h2"
-          variant="h5"
-        >
+        <Typography component="h2" variant="h5">
           {name}
         </Typography>
       </CardContent>
       <Stack>
-        <Button          
-          data-testid={`toggle-todo-${id}`}
-          color="primary"
-          onClick={() => onToggle(id)}
-        >
+        <Button color="primary" onClick={() => onToggle(id)}>
           {statusLabel}
         </Button>
         <Button
-          data-testid={`remove-todo-${id}`}
           color="error"
           variant="contained"
-          onClick={() => onRemove(id)}
+          onClick={() => onDelete(todo)}
         >
           Apagar
         </Button>
       </Stack>
     </Card>
-  )
+  );
 };
-    
+
 export default Todo;

@@ -1,32 +1,20 @@
-import React, { FC } from 'react';
-import {
-  Box,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import React from 'react';
 import { useFormik } from 'formik';
+import { Box, Button, TextField } from '@material-ui/core';
 import { ITodo } from '../Todo';
 import { TodoFormProps } from './typings';
 import validationSchema from '../../utils/validationSchema';
-import { GET_CURRENT_TIMESTAMP, TODO_HELPER_TEXT } from '../../utils/globalVariables';
+import { TODO_HELPER_TEXT } from '../../utils/globalVariables';
 
-const TodoForm: FC<TodoFormProps> = ({ onSubmit }: TodoFormProps) => {
-
-  const submitHandler = (newTodoName: string) => {
-    const newTodo: ITodo = {
-      id: GET_CURRENT_TIMESTAMP(),
-      name: newTodoName,
-      done: false,
-    };
-    onSubmit(newTodo);
-  }
-
-  const formik = useFormik({
+const TodoForm = ({ onSubmit }: TodoFormProps) => {
+  const submitHandler = (newTodoName: ITodo['name']) => onSubmit(newTodoName);
+  const formik = useFormik<Pick<ITodo, 'name'>>({
     initialValues: {
-      todoName: '',
+      name: '',
     },
-    onSubmit: (values) => {
-      submitHandler(values.todoName);
+    onSubmit: (values, { resetForm }) => {
+      submitHandler(values.name);
+      resetForm();
     },
     validationSchema,
   });
@@ -41,17 +29,17 @@ const TodoForm: FC<TodoFormProps> = ({ onSubmit }: TodoFormProps) => {
         }}
       >
         <TextField
-          id="todoName"
+          name="name"
           data-testid="add-todo-input"
           sx={{
             maxWidth: '300px',
             mr: 'auto',
             width: '100%',
           }}
-          error={!!formik.errors.todoName}
-          helperText={formik.errors.todoName || TODO_HELPER_TEXT}
+          error={!!formik.errors.name}
+          helperText={formik.errors.name || TODO_HELPER_TEXT}
           label="Nova Tarefa"
-          value={formik.values.todoName}
+          value={formik.values.name}
           variant="filled"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -66,7 +54,7 @@ const TodoForm: FC<TodoFormProps> = ({ onSubmit }: TodoFormProps) => {
         </Button>
       </Box>
     </form>
-    )
+  );
 };
-  
+
 export default TodoForm;

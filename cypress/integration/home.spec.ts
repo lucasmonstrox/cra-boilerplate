@@ -37,7 +37,7 @@ it('should create a new todo when form is submitted correctly', () => {
   cy.mockGql('GetTodos', { todos: [createTodo, ...todos] });
   getTodoNameInput().type(createTodo.name);
   getAddButton().click();
-  cy.wait('@CreateTodo');
+  cy.wait(['@CreateTodo', '@GetTodos']);
   getTodo(createTodo.id).should('exist');
 });
 

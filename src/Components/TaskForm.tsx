@@ -31,8 +31,8 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
           Título
         </InputLabel>
         <TextField
-          data-testid="task-title-input"
           id="title"
+          data-testid="task-title-input"
           type="text"
           name="title"
           fullWidth

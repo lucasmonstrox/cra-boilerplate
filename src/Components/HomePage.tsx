@@ -83,7 +83,7 @@ const HomePage: FC = () => {
                 autoHideDuration={TWO_SECONDS_AND_HALF}
                 onClose={closeModalHandler}
             >
-                <MuiAlert data-testid="modal-msg-action-task" elevation={6} variant="filled" severity="success">
+                <MuiAlert data-testid="info-modal" elevation={6} variant="filled" severity="success">
                     {infoMessageModal}
                 </MuiAlert>
             </Snackbar>

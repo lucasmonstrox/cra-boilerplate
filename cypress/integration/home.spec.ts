@@ -1,10 +1,9 @@
 const getTaskTitleInput = () => cy.get('[data-testid="task-title-input"]');
 const getAddTaskButton = () => cy.get('[data-testid="add-task-button"]');
 const getTitleMsgError = () => cy.get('[data-testid="title-msg-error"]');
-const getModalActionTask = () =>
-  cy.get('[data-testid="modal-msg-action-task"]');
+const getInfoModal = () => cy.get('[data-testid="info-modal"]');
 const getFirstTaskItem = () => cy.get('.task-item').first();
-const getButtonCheckedTask = () => getFirstTaskItem().find('[type="checkbox"]');
+const getCheckTaskButton = () => getFirstTaskItem().find('[type="checkbox"]');
 const getRemoveTaskButton = () => cy.get('[data-testid="remove-task-button"]');
 
 beforeEach(() => {
@@ -32,11 +31,11 @@ it('should appear error of task title when the task title input length is greate
 it('should add new task when form is submitted correct', () => {
   getTaskTitleInput().type('Segunda');
   getAddTaskButton().click();
-  getModalActionTask().should('be.visible');
+  getInfoModal().should('be.visible');
 });
 
 it('should mark task as completed when click on checkbox', () => {
-  getButtonCheckedTask().click();
+  getCheckTaskButton().click();
   getFirstTaskItem()
     .find('.MuiListItemText-root')
     .should('have.css', 'text-decoration-line', 'line-through');
@@ -44,5 +43,5 @@ it('should mark task as completed when click on checkbox', () => {
 
 it('should remove task when click on remove task button', () => {
   getRemoveTaskButton().click();
-  getModalActionTask().should('be.visible');
+  getInfoModal().should('be.visible');
 });

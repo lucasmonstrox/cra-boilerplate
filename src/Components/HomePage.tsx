@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Grid, List, Snackbar } from '@material-ui/core';
+import { Container, List, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/core/Alert';
 import Task from './Task';
 import TaskForm from './TaskForm';
@@ -51,15 +51,11 @@ const HomePage: FC = () => {
   };
 
   return (
-    <Grid
-      container
+    <Container
+      maxWidth="sm"
       sx={{
-        height: '100%',
-        width: '50vw',
         pt: 10,
-        margin: '0 auto',
       }}
-      direction="column"
     >
       <TaskForm onTaskAdded={taskAddedHandler} />
       <List>
@@ -90,7 +86,7 @@ const HomePage: FC = () => {
           {infoMessageModal}
         </MuiAlert>
       </Snackbar>
-    </Grid>
+    </Container>
   );
 };
 

@@ -1,7 +1,8 @@
-const getTaskInput = () => cy.get('[data-testid="input-task"]');
+const getTaskInput = () => cy.get('[data-testid="task-input"]');
 const getAddTaskButton = () => cy.get('[data-testid="add-task-button"]');
 const getTaskInputError = () => getTaskInput().find('.Mui-error');
 const getTaskItem = () => cy.get('.MuiListItem-root');
+
 
 it('should appear label message error when form is submitted empty', () => {
   cy.visit('/');

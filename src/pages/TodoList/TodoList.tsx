@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import {
-  TextField,
+  Box,
   IconButton,
   List,
   ListItem,
   ListItemText,
+  TextField,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
 
 interface TodoItem {
-  title: string;
   id: number;
+  title: string;
   done: boolean;
 }
 
@@ -24,9 +25,8 @@ interface MyFormValues {
 const TodoList: React.FC = () => {
   const [list, setList] = useState<TodoItem[]>([]);
   const [itemFilter, setItemFilter] = useState('');
-  const initialValues: MyFormValues = { title: '' };
-  const formik = useFormik({
-    initialValues,
+  const formik = useFormik<MyFormValues>({
+    initialValues: { title: '' },
     onSubmit: (values, actions) => {
       const newTodo: TodoItem = {
         title: values.title,
@@ -57,13 +57,15 @@ const TodoList: React.FC = () => {
   };
 
   const toggleTodo = (todo: TodoItem) => {
-    const todoIndex = list.findIndex((currentTodo) => currentTodo.id === todo.id);
+    const todoIndex = list.findIndex(
+      (currentTodo) => currentTodo.id === todo.id,
+    );
     list[todoIndex].done = !list[todoIndex].done;
     setList([...list]);
-  }
+  };
 
   return (
-    <div
+    <Box
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -77,22 +79,22 @@ const TodoList: React.FC = () => {
       }}
     >
       <TextField
-        value={itemFilter}
-        onChange={(e) => setItemFilter(e.target.value)}
+        data-testid="input-filter"
         color="primary"
         label="Filtrar por título"
-        data-testid="input-filter"
+        value={itemFilter}
+        onChange={(e) => setItemFilter(e.target.value)}
       />
       <form onSubmit={formik.handleSubmit}>
         <TextField
+          data-testid="task-input"
+          color="primary"
+          name="title"
+          label="Adicionar task"
           error={!!formik.errors.title}
           helperText={formik.errors.title}
           value={formik.values.title}
           onChange={formik.handleChange}
-          color="primary"
-          label="Adicionar task"
-          data-testid="input-task"
-          name="title"
         />
         <IconButton onClick={formik.submitForm} data-testid="add-task-button">
           <AddIcon />
@@ -109,25 +111,25 @@ const TodoList: React.FC = () => {
             }}
           >
             <ListItemText
+              data-testid="task-input"
               primary={item.title}
-              data-testid="input-task"
               onClick={() => toggleTodo(item)}
               sx={{
-                color: "red",
+                color: 'red',
                 textDecoration: `${item.done && 'line-through'}`,
               }}
             />
 
             <IconButton
-              onClick={() => handleDelete(item.id)}
               data-testid="exlude-task-button"
+              onClick={() => handleDelete(item.id)}
             >
               <DeleteIcon />
             </IconButton>
           </ListItem>
         ))}
       </List>
-    </div>
+    </Box>
   );
 };
 

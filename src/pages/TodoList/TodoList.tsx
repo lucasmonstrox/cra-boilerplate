@@ -43,7 +43,7 @@ const TodoList: React.FC = () => {
     }),
   });
 
-  const handleDelete = (id: TodoItem['id']) => {
+  const handleDeleteFn = (id: TodoItem['id']) => () => {
     setList((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -56,7 +56,7 @@ const TodoList: React.FC = () => {
     );
   };
 
-  const toggleTodo = (todo: TodoItem) => {
+  const handleToggleTaskFn =  (todo: TodoItem) => () => {
     const todoIndex = list.findIndex(
       (currentTodo) => currentTodo.id === todo.id,
     );
@@ -79,7 +79,7 @@ const TodoList: React.FC = () => {
       }}
     >
       <TextField
-        data-testid="input-filter"
+        data-testid="input-task-search"
         color="primary"
         label="Filtrar por título"
         value={itemFilter}
@@ -101,9 +101,9 @@ const TodoList: React.FC = () => {
         </IconButton>
       </form>
       <List>
-        {handleFilter(itemFilter).map((item) => (
+        {handleFilter(itemFilter).map((taskItem) => (
           <ListItem
-            key={item.id}
+            key={taskItem.id}
             style={{
               display: 'flex',
               marginTop: '1em',
@@ -111,19 +111,14 @@ const TodoList: React.FC = () => {
             }}
           >
             <ListItemText
-              data-testid="task-input"
-              primary={item.title}
-              onClick={() => toggleTodo(item)}
+              data-testid={`task-item-${taskItem.id}`}
+              primary={taskItem.title}
               sx={{
-                color: 'red',
-                textDecoration: `${item.done && 'line-through'}`,
+                textDecoration: `${taskItem.done && 'line-through'}`,
               }}
+              onClick={() => handleToggleTaskFn(taskItem)}
             />
-
-            <IconButton
-              data-testid="exlude-task-button"
-              onClick={() => handleDelete(item.id)}
-            >
+            <IconButton onClick={handleDeleteFn(taskItem.id)} data-testid="delete-task-button">
               <DeleteIcon />
             </IconButton>
           </ListItem>

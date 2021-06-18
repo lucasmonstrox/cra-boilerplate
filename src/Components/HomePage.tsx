@@ -14,7 +14,8 @@ const TWO_SECONDS_AND_HALF = 2500;
 const HomePage: FC = () => {
     const [tasks, setTasks] = useState([{
         title: 'Tarefa 1',
-        id: Math.random()
+        id: Math.random(),
+        done: false
     }]);
 
     const [infoMessageModal, setInfoMessageModal] = useState('');
@@ -23,7 +24,8 @@ const HomePage: FC = () => {
         setTasks((prevState) => [
             {
                 title: values.title,
-                id: Math.random()
+                id: Math.random(),
+                done: false
             },
             ...prevState
         ]);
@@ -44,8 +46,15 @@ const HomePage: FC = () => {
         setInfoMessageModal('');
     };
 
+    const toggleCheckedTaskProp = (id: number) => {
+        const taskIndex = tasks.findIndex(( currentTask ) => currentTask.id === id);
+        tasks[taskIndex].done = !tasks[taskIndex].done;
+        setTasks([... tasks]);
+    }
+
     return (
         <Grid
+            container
             sx={{
                 height: '100%',
                 width: '50vw',
@@ -57,7 +66,12 @@ const HomePage: FC = () => {
             <TaskForm onTaskAdded={taskAddedHandler} />
             <List>
                 {tasks.map((task: any) => (
-                    <Task key={task.id} task={task} onRemove={removeTaskHandler} />
+                    <Task
+                        key={task.id}
+                        task={task}
+                        onRemove={removeTaskHandler}
+                        onToggle={toggleCheckedTaskProp}
+                    />
                 ))}
             </List>
             <Snackbar

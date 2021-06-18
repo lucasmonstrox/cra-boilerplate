@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import {
     Box,
     Checkbox,
@@ -8,11 +8,10 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import { PropsTask } from '../interfaces/task';
 
-const Task: FC<PropsTask> = ({ task, onRemove }: PropsTask) => {
-    const [taskChecked, setTaskChecked] = useState(false);
+const Task: FC<PropsTask> = ({ task, onRemove, onToggle }: PropsTask) => {
 
-    const toggleTaskChecked = () => {
-        setTaskChecked((prevState) => !prevState);
+    const toggleTaskChecked = (id: any) => {
+        onToggle(id);
     };
 
     return (
@@ -20,13 +19,13 @@ const Task: FC<PropsTask> = ({ task, onRemove }: PropsTask) => {
             <Checkbox
                 data-testid="button-checked-task"
                 inputProps={{ 'aria-label': 'primary checkbox' }}
-                onChange={toggleTaskChecked}
+                onChange={() => toggleTaskChecked(task.id)}
             />
             <Typography
                 data-testid="text-title-task"
                 component="h4"
                 sx={{
-                    textDecoration: `${taskChecked && 'line-through'}`
+                    textDecoration: `${task.done && 'line-through'}`
                 }}
             >
                 {task.title}

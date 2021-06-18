@@ -1,6 +1,7 @@
 export interface ITask {
     title: string
     id?: number
+    done?: boolean
 };
 
 export interface PropsTaskForm {
@@ -9,5 +10,6 @@ export interface PropsTaskForm {
 
 export interface PropsTask {
     task: ITask,
-    onRemove: Function
+    onRemove: Function,
+    onToggle: Function
 };

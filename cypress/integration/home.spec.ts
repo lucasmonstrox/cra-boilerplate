@@ -6,7 +6,7 @@ const getModalActionTask = () =>
 const getButtonCheckedTask = () =>
   cy.get('[data-testid="button-checked-task"]');
 const getTextTitleTask = () => cy.get('[data-testid="text-title-task"]');
-const getButtonRemoveTask = () => cy.get('[data-testid="button-remove-task"]');
+const getRemoveTaskButton = () => cy.get('[data-testid="remove-task-button"]');
 
 beforeEach(() => {
   cy.visit('/');
@@ -42,6 +42,6 @@ it('Should cross off task when completed', () => {
 });
 
 it('Should check if the task has been removed', () => {
-  getButtonRemoveTask().click();
+  getRemoveTaskButton().click();
   getModalActionTask().should('be.visible');
 });

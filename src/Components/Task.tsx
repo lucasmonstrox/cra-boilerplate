@@ -31,7 +31,7 @@ const Task: FC<PropsTask> = ({ task, onRemove, onToggle }: PropsTask) => {
                 {task.title}
             </Typography>
             <Box
-                data-testid="button-remove-task"
+                data-testid="remove-task-button"
                 sx={{
                     cursor: 'pointer',
                     ml: 'auto',

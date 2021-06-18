@@ -8,7 +8,7 @@ import { ITask } from '../interfaces/task';
 const TWO_SECONDS_AND_HALF = 2500;
 
 const HomePage: FC = () => {
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<ITask[]>([
     {
       title: 'Tarefa 1',
       id: Math.random(),
@@ -59,7 +59,7 @@ const HomePage: FC = () => {
     >
       <TaskForm onTaskAdded={taskAddedHandler} />
       <List>
-        {tasks.map((task: any) => (
+        {tasks.map((task) => (
           <Task
             key={task.id}
             task={task}

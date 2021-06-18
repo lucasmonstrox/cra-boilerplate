@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('mockGql', (operationName: string, data: unknown) => {
+  cy.intercept('POST', '/graphql', (req) => {
+    if (req.body.operationName && req.body.operationName === operationName) {
+      req.alias = operationName;
+      req.reply({ data });
+    }
+  });
+});

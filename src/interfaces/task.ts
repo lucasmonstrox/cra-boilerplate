@@ -1,7 +1,7 @@
 export interface ITask {
     title: string
-    id?: number
-    done?: boolean
+    id: number
+    done: boolean
 };
 
 export interface PropsTaskForm {

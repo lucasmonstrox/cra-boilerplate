@@ -1,56 +1,74 @@
 import React, { useState } from 'react';
-import { TextField, IconButton } from '@material-ui/core';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import {
+  TextField,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 interface TodoItem {
+  title: string;
   id: number;
-  value: string;
+  done: boolean;
 }
 
-let countId = 0;
+interface MyFormValues {
+  title: string;
+}
 
 const TodoList: React.FC = () => {
-  const [list, setList] = useState<TodoItem[]>([{ id: 0, value: '' }]);
+  const [list, setList] = useState<TodoItem[]>([]);
   const [itemFilter, setItemFilter] = useState('');
-
-  const handleChange = (value: string, id: TodoItem['id']) => {
-    setList((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, value } : item)),
-    );
-  };
+  const initialValues: MyFormValues = { title: '' };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values, actions) => {
+      const newTodo: TodoItem = {
+        title: values.title,
+        id: Math.random(),
+        done: false,
+      };
+      setList((prev) => [newTodo, ...prev]);
+      actions.resetForm();
+    },
+    validationSchema: Yup.object().shape({
+      title: Yup.string()
+        .required('Campo obrigatório')
+        .max(20, 'O limite máximo é de 20 caracteres'),
+    }),
+  });
 
   const handleDelete = (id: TodoItem['id']) => {
     setList((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleAdd = (index: number) => {
-    const newTodo = { id: countId + 1, value: '' };
-    countId += 1;
-    setList((prev) => [
-      ...prev.slice(0, index + 1),
-      newTodo,
-      ...prev.slice(index + 1),
-    ]);
-  };
-
-  const handleFilter = (value: string) => {
-    if (value.length === 0) {
+  const handleFilter = (title: string) => {
+    if (title.length === 0) {
       return list;
     }
     return list.filter((item) =>
-      item.value.toLowerCase().includes(value.toLowerCase()),
+      item.title.toLowerCase().includes(title.toLowerCase()),
     );
   };
+
+  const toggleTodo = (todo: TodoItem) => {
+    const todoIndex = list.findIndex((currentTodo) => currentTodo.id === todo.id);
+    list[todoIndex].done = !list[todoIndex].done;
+    setList([...list]);
+  }
 
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        // backgroundColor: 'gray',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'absolute',
         top: '0',
         bottom: '0',
@@ -63,23 +81,52 @@ const TodoList: React.FC = () => {
         onChange={(e) => setItemFilter(e.target.value)}
         color="primary"
         label="Filtrar por título"
+        data-testid="input-filter"
       />
-      {handleFilter(itemFilter).map((item, index) => (
-        <div key={item.id} style={{display: "flex", marginTop: "1em", backgroundColor: "white"}}>
-          <TextField
-            value={item.value}
-            onChange={(e) => handleChange(e.currentTarget.value, item.id)}
-          />
-          <IconButton onClick={() => handleAdd(index)}>
-            <AddIcon />
-          </IconButton>
-          {list.length > 1 && (
-            <IconButton onClick={() => handleDelete(item.id)}>
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          error={!!formik.errors.title}
+          helperText={formik.errors.title}
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          color="primary"
+          label="Adicionar task"
+          data-testid="input-task"
+          name="title"
+        />
+        <IconButton onClick={formik.submitForm} data-testid="add-task-button">
+          <AddIcon />
+        </IconButton>
+      </form>
+      <List>
+        {handleFilter(itemFilter).map((item) => (
+          <ListItem
+            key={item.id}
+            style={{
+              display: 'flex',
+              marginTop: '1em',
+              backgroundColor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={item.title}
+              data-testid="input-task"
+              onClick={() => toggleTodo(item)}
+              sx={{
+                color: "red",
+                textDecoration: `${item.done && 'line-through'}`,
+              }}
+            />
+
+            <IconButton
+              onClick={() => handleDelete(item.id)}
+              data-testid="exlude-task-button"
+            >
               <DeleteIcon />
             </IconButton>
-          )}
-        </div>
-      ))}
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 };

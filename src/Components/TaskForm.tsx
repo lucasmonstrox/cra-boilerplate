@@ -4,6 +4,7 @@ import {
     Button,
     InputLabel,
     TextField,
+    Typography
 } from '@material-ui/core';
 import { FormikHelpers, useFormik } from 'formik';
 import schema from './Validation/schema';
@@ -27,7 +28,7 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
         <Box>
             <form onSubmit={handleSubmit}>
                 <InputLabel
-                    sx={{ mb: '.3rem', mt: '1rem' }}
+                    sx={{ mb: 1, mt: 3 }}
                     htmlFor="titleTask">
                     Título
                 </InputLabel>
@@ -41,9 +42,9 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
-                <Box sx={{ color: 'red', mt: '.3rem' }} data-testid="title-msg-error">
+                <Box sx={{ color: 'red', mt: 1 }} data-testid="title-msg-error">
                     {
-                        errors.title && <p>{errors.title}</p>
+                        errors.title && <Typography>{errors.title}</Typography>
                     }
                 </Box>
                 <Button
@@ -51,7 +52,7 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
                     color="secondary"
                     fullWidth
                     sx={{
-                        mt: 2
+                        mt: 1
                     }}
                     type="submit"
                     data-testid="add-task-button"

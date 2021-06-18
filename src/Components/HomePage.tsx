@@ -49,7 +49,7 @@ const HomePage: FC = () => {
             sx={{
                 height: '100%',
                 width: '50vw',
-                pt: '5rem',
+                pt: 10,
                 margin: '0 auto',
             }}
             direction="column"

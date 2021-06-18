@@ -33,21 +33,22 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
                     Título
                 </InputLabel>
                 <TextField
+                    data-testid="task-title-input"
                     id="title"
                     name="title"
                     type="text"
                     fullWidth
-                    data-testid="task-title-input"
                     value={values.title}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
-                <Box sx={{ color: 'red', mt: 1 }} data-testid="title-msg-error">
+                <Box data-testid="title-msg-error" sx={{ color: 'red', mt: 1 }}>
                     {
                         errors.title && <Typography>{errors.title}</Typography>
                     }
                 </Box>
                 <Button
+                    data-testid="add-task-button"
                     variant="contained"
                     color="secondary"
                     fullWidth
@@ -55,7 +56,6 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
                         mt: 1
                     }}
                     type="submit"
-                    data-testid="add-task-button"
                 >
                     Adicionar tarefa
                 </Button>

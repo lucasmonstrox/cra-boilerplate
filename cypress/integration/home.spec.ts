@@ -3,9 +3,8 @@ const getAddTaskButton = () => cy.get('[data-testid="add-task-button"]');
 const getTitleMsgError = () => cy.get('[data-testid="title-msg-error"]');
 const getModalActionTask = () =>
   cy.get('[data-testid="modal-msg-action-task"]');
-const getButtonCheckedTask = () =>
-  cy.get('[data-testid="button-checked-task"]');
-const getTextTitleTask = () => cy.get('[data-testid="text-title-task"]');
+const getFirstTaskItem = () => cy.get('.task-item').first();
+const getButtonCheckedTask = () => getFirstTaskItem().find('[type="checkbox"]');
 const getRemoveTaskButton = () => cy.get('[data-testid="remove-task-button"]');
 
 beforeEach(() => {
@@ -36,12 +35,14 @@ it('should add new task when form is submitted correct', () => {
   getModalActionTask().should('be.visible');
 });
 
-it('Should cross off task when completed', () => {
+it('should mark task as completed when click on checkbox', () => {
   getButtonCheckedTask().click();
-  getTextTitleTask().should('have.css', 'text-decoration-line', 'line-through');
+  getFirstTaskItem()
+    .find('.MuiListItemText-root')
+    .should('have.css', 'text-decoration-line', 'line-through');
 });
 
-it('Should check if the task has been removed', () => {
+it('should remove task when click on remove task button', () => {
   getRemoveTaskButton().click();
   getModalActionTask().should('be.visible');
 });

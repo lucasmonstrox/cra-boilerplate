@@ -21,13 +21,13 @@ const HomePage: FC = () => {
     const [infoMessageModal, setInfoMessageModal] = useState('');
 
     const taskAddedHandler = (values: ITask) => {
-        setTasks((prevState) => [
+        setTasks((previousTasks) => [
             {
                 title: values.title,
                 id: Math.random(),
                 done: false
             },
-            ...prevState
+            ...previousTasks
         ]);
         setInfoMessageModal('Tarefa adicionada com sucesso.');
     };

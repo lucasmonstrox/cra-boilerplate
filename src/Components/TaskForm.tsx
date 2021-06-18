@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import {
     Box,
     Button,
-    Container,
     InputLabel,
     TextField,
 } from '@material-ui/core';
@@ -31,7 +30,7 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
     })
 
     return (
-        <Container>
+        <Box>
             <form onSubmit={handleSubmit}>
                 <InputLabel
                     sx={{ mb: '.3rem', mt: '1rem' }}
@@ -66,7 +65,7 @@ const TaskForm: FC<Props> = ({ onTaskAdded }: Props) => {
                     Adicionar tarefa
                 </Button>
             </form>
-        </Container>
+        </Box>
     )
 }
 

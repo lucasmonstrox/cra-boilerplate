@@ -16,7 +16,7 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
         onTaskAdded(values);
     };
 
-    const { handleSubmit, errors, handleChange, values, handleBlur } = useFormik({
+    const { handleSubmit, errors, handleChange, values, handleBlur } = useFormik<Pick<ITask, 'title'>>({
         initialValues: {
             title: ""
         },

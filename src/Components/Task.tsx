@@ -15,7 +15,7 @@ const Task: FC<PropsTask> = ({ task, onRemove, onToggle }: PropsTask) => {
     };
 
     return (
-        <ListItem sx={{ mb: 1 }} >
+        <ListItem sx={{ mb: 1 }}>
             <Checkbox
                 data-testid="button-checked-task"
                 inputProps={{ 'aria-label': 'primary checkbox' }}

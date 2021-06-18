@@ -29,7 +29,8 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
             <form onSubmit={handleSubmit}>
                 <InputLabel
                     sx={{ mb: 1, mt: 3 }}
-                    htmlFor="titleTask">
+                    htmlFor="titleTask"
+                >
                     Título
                 </InputLabel>
                 <TextField

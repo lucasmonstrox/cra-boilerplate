@@ -47,10 +47,10 @@ const HomePage: FC = () => {
     };
 
     const toggleCheckedTaskProp = (id: number) => {
-        const taskIndex = tasks.findIndex(( currentTask ) => currentTask.id === id);
+        const taskIndex = tasks.findIndex((currentTask) => currentTask.id === id);
         tasks[taskIndex].done = !tasks[taskIndex].done;
-        setTasks([... tasks]);
-    }
+        setTasks([...tasks]);
+    };
 
     return (
         <Grid

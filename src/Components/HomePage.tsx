@@ -79,9 +79,9 @@ const HomePage: FC = () => {
       >
         <MuiAlert
           data-testid="info-modal"
-          elevation={6}
           variant="filled"
           severity="success"
+          elevation={6}
         >
           {infoMessageModal}
         </MuiAlert>

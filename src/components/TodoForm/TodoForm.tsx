@@ -45,7 +45,7 @@ const TodoForm = ({ onSubmit }: TodoFormProps) => {
           onChange={formik.handleChange}
         />
         <Button
-          data-testid="add-todo-btn"
+          data-testid="add-todo-button"
           type="submit"
           color="primary"
           variant="contained"

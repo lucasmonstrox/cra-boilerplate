@@ -32,7 +32,7 @@ const HomePage: FC = () => {
         setInfoMessageModal('Tarefa adicionada com sucesso.');
     };
 
-    const removeTaskHandler = (id: number) => {
+    const removeTaskHandler = (id: ITask['id']) => {
         const newTasks = tasks.filter((task) => task.id !== id);
         setTasks(newTasks);
         setInfoMessageModal('Tarefa removida com sucesso.');

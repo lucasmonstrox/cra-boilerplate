@@ -6,7 +6,7 @@ interface Todo {
 
 interface TodoProps {
   todo: Todo;
-  onRemove: Function;
+  onDelete: Function;
   onToggle: Function;
 };
 

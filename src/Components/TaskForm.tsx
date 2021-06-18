@@ -1,19 +1,19 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 import {
     Box,
     Button,
     InputLabel,
     TextField,
 } from '@material-ui/core';
-import { FormikHelpers, useFormik } from 'formik'
+import { FormikHelpers, useFormik } from 'formik';
 import schema from './Validation/schema';
 import { ITask, PropsTaskForm } from '../interfaces/task';
 
 const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
     const handleSubmitAddTask = (values: ITask, { resetForm }: FormikHelpers<ITask>) => {
-        resetForm()
-        onTaskAdded(values)
-    }
+        resetForm();
+        onTaskAdded(values);
+    };
 
     const { handleSubmit, errors, handleChange, values, handleBlur } = useFormik({
         initialValues: {
@@ -21,7 +21,7 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
         },
         onSubmit: handleSubmitAddTask,
         validationSchema: schema
-    })
+    });
 
     return (
         <Box>
@@ -60,7 +60,7 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
                 </Button>
             </form>
         </Box>
-    )
-}
+    );
+};
 
 export default TaskForm;

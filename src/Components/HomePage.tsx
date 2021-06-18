@@ -7,7 +7,7 @@ import {
 import MuiAlert from '@material-ui/core/Alert';
 import Task from './Task';
 import TaskForm from './TaskForm';
-import { ITask } from '../interfaces/task'
+import { ITask } from '../interfaces/task';
 
 const TWO_SECONDS_AND_HALF = 2500;
 
@@ -37,7 +37,7 @@ const HomePage: FC = () => {
     };
 
     const closeModalHandler = (_: any, reason: string) => {
-        const isClickIngAway = reason === 'clickaway'
+        const isClickIngAway = reason === 'clickaway';
         if (isClickIngAway) {
             return;
         };
@@ -74,7 +74,7 @@ const HomePage: FC = () => {
                 </MuiAlert>
             </Snackbar>
         </Grid>
-    )
-}
+    );
+};
 
 export default HomePage;

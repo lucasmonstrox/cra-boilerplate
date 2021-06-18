@@ -1,19 +1,19 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState } from 'react';
 import {
     Box,
     Checkbox,
     ListItem,
     Typography
-} from '@material-ui/core'
+} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { PropsTask } from '../interfaces/task'
+import { PropsTask } from '../interfaces/task';
 
 const Task: FC<PropsTask> = ({ task, onRemove }: PropsTask) => {
-    const [taskChecked, setTaskChecked] = useState(false)
+    const [taskChecked, setTaskChecked] = useState(false);
 
     const toggleTaskChecked = () => {
-        setTaskChecked((prevState) => !prevState)
-    }
+        setTaskChecked((prevState) => !prevState);
+    };
 
     return (
         <ListItem sx={{ mb: 1 }} >
@@ -42,7 +42,7 @@ const Task: FC<PropsTask> = ({ task, onRemove }: PropsTask) => {
                 <DeleteIcon />
             </Box>
         </ListItem>
-    )
-}
+    );
+};
 
-export default Task
+export default Task;

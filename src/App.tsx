@@ -9,6 +9,6 @@ const App: FC = () => (
     <CssBaseline />
     <HomePage />
   </ApolloProvider>
-)
+);
 
 export default App;

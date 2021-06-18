@@ -27,14 +27,14 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        <InputLabel sx={{ mb: 1, mt: 3 }} htmlFor="titleTask">
+        <InputLabel htmlFor="title" sx={{ mb: 1, mt: 3 }}>
           Título
         </InputLabel>
         <TextField
           data-testid="task-title-input"
           id="title"
-          name="title"
           type="text"
+          name="title"
           fullWidth
           value={values.title}
           onChange={handleChange}
@@ -45,13 +45,13 @@ const TaskForm: FC<PropsTaskForm> = ({ onTaskAdded }: PropsTaskForm) => {
         </Box>
         <Button
           data-testid="add-task-button"
+          type="submit"
           variant="contained"
           color="secondary"
           fullWidth
           sx={{
             mt: 1,
           }}
-          type="submit"
         >
           Adicionar tarefa
         </Button>
